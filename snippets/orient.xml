@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+
+  <!-- Github -->
+  <remote  name="github"
+           fetch=".." />
+
+  <!-- Orient OS -->
+  <remote  name="orient"
+           revision="12"
+           fetch="../orient-project" />
+
+  <!-- Code Aurora Forums -->
+  <remote name="caf"
+          fetch="https://source.codeaurora.org/quic/la"
+          revision="refs/tags/LA.QSSI.12.0.r1-05100.02-qssi.0" />
+
+  <!-- ART -->
+  <project path="art" name="art" remote="orient" />
+
+  <!-- Bionic -->
+  <project path="bionic" name="bionic" remote="orient" />
+
+  <!-- Build -->
+  <project path="build/make" name="build" remote="orient" groups="pdk" >
+    <copyfile src="core/root.mk" dest="Makefile" />
+    <linkfile src="CleanSpec.mk" dest="build/CleanSpec.mk" />
+    <linkfile src="buildspec.mk.default" dest="build/buildspec.mk.default" />
+    <linkfile src="core" dest="build/core" />
+    <linkfile src="envsetup.sh" dest="build/envsetup.sh" />
+    <linkfile src="target" dest="build/target" />
+    <linkfile src="tools" dest="build/tools" />
+  </project>
+  <project path="build/soong" name="build_soong" remote="orient" groups="pdk,tradefed" >
+    <linkfile src="root.bp" dest="Android.bp" />
+    <linkfile src="bootstrap.bash" dest="bootstrap.bash" />
+  </project>
+
+  <!-- Development -->
+  <project path="development" name="development" remote="orient" />
+
+  <!-- Device -->
+  <project path="device/orient/sepolicy" name="device_orient_sepolicy" remote="orient" />
+  <project path="device/qcom/common" name="device_qcom_common" remote="orient" />
+  <project path="device/qcom/sepolicy" name="device_qcom_sepolicy" remote="orient"  />
+  <project path="device/qcom/sepolicy_vndr" name="device_qcom_sepolicy" remote="orient" revision="12-vendor" />
+  <project path="device/qcom/sepolicy-legacy-um" name="device_qcom_sepolicy" remote="orient" revision="12-legacy-um" />
+
+  <!-- External -->
+  <project path="external/ant-wireless/ant_client" name="LineageOS/android_external_ant-wireless_ant_client" remote="github" revision="lineage-18.1" />
+  <project path="external/ant-wireless/ant_native" name="LineageOS/android_external_ant-wireless_ant_native" remote="github" revision="lineage-18.1" />
+  <project path="external/ant-wireless/ant_service" name="LineageOS/android_external_ant-wireless_ant_service" remote="github" revision="lineage-18.1" />
+  <project path="external/ant-wireless/antradio-library" name="LineageOS/android_external_ant-wireless_antradio-library" remote="github" revision="lineage-18.1" />
+  <project path="external/ant-wireless/hidl" name="LineageOS/android_external_ant-wireless_hidl" remote="github" revision="lineage-18.1" />
+  <project path="external/arm-optimized-routines" name="external_arm-optimized-routines" remote="orient" />
+  <project path="external/compiler-rt" name="external_compiler-rt" remote="orient" />
+  <project path="external/dtc" name="external_dtc" remote="orient" />
+  <project path="external/e2fsprogs" name="external_e2fsprogs" remote="orient" />
+  <project path="external/gptfdisk" name="external_gptfdisk" remote="orient" />
+  <project path="external/honggfuzz" name="external_honggfuzz" remote="orient" />
+  <project path="external/json-c" name="external_json-c" remote="orient" />
+  <project path="external/libnfc-nxp" name="external_libnfc-nxp" remote="orient" />
+  <project path="external/python/cpython2" name="external_python_cpython2" remote="orient" />
+  <project path="external/selinux" name="external_selinux" remote="orient" />
+  <project path="external/tinycompress" name="external_tinycompress" remote="orient" />
+  <project path="external/wpa_supplicant_8" name="external_wpa_supplicant_8" remote="orient" />
+
+  <!-- Frameworks -->
+  <project path="frameworks/av" name="frameworks_av" remote="orient" />
+  <project path="frameworks/base" name="frameworks_base" remote="orient" />
+  <project path="frameworks/native" name="frameworks_native" remote="orient" />
+  <project path="frameworks/libs/native_bridge_support" name="frameworks_libs_native_bridge_support" remote="orient" />
+  <project path="frameworks/libs/systemui" name="frameworks_libs_systemui" remote="orient" />
+  <project path="frameworks/opt/net/ims" name="frameworks_opt_net_ims" remote="orient" />
+  <project path="frameworks/opt/telephony" name="frameworks_opt_telephony" remote="orient" />
+
+  <!-- Hardware -->
+  <project path="hardware/interfaces" name="hardware_interfaces" remote="orient" />
+  <project path="hardware/libhardware" name="hardware_libhardware" remote="orient" />
+  <project path="hardware/qcom/display" name="hardware_qcom_display" remote="orient" />
+  <project path="hardware/qcom/gps" name="hardware_qcom_gps" remote="orient" />
+  <project path="hardware/qcom/keymaster" name="hardware_qcom_keymaster" remote="orient" />
+  <project path="hardware/qcom/media" name="hardware_qcom_media" remote="orient" />
+  <project path="hardware/qcom-caf/common" name="hardware_qcom-caf_common" remote="orient" >
+    <!-- Add guard for AOSP hardware/qcom directory. -->
+    <linkfile src="os_pickup_aosp.mk" dest="hardware/qcom/Android.mk" />
+    <!-- Add guards for CAF repositories. -->
+    <linkfile src="os_pickup.bp" dest="hardware/qcom-caf/msm8996/Android.bp" />
+    <linkfile src="os_pickup.mk" dest="hardware/qcom-caf/msm8996/Android.mk" />
+  </project>
+  <project path="hardware/qcom-caf/bt" name="hardware_qcom_bt" remote="orient" revision="10-caf" />
+  <project path="hardware/qcom-caf/msm8996/audio" name="hardware_qcom_audio" revision="12-caf-8996" remote="orient" />
+  <project path="hardware/qcom-caf/msm8996/display" name="hardware_qcom_display" revision="12-caf-8996" remote="orient"  />
+  <project path="hardware/qcom-caf/msm8996/media" name="hardware_qcom_media" revision="12-caf-8996" remote="orient" />
+  <project path="hardware/qcom-caf/wlan" name="hardware_qcom_wlan" remote="orient" />
+  <project path="hardware/ril" name="hardware_ril" remote="orient" />
+  <project path="hardware/orient/interfaces" name="hardware_orient_interfaces" remote="orient" />
+
+  <!-- Manifest -->
+  <project path="manifest" name="manifest" remote="orient" />
+
+  <!-- Packages -->
+  <project path="packages/apps/Bluetooth" name="packages_apps_Bluetooth" remote="orient" />
+  <project path="packages/apps/Launcher3" name="packages_apps_Launcher3" remote="orient" />
+  <project path="packages/apps/PermissionController" name="packages_apps_PackageInstaller" remote="orient" />
+  <project path="packages/apps/PhoneCommon" name="packages_apps_PhoneCommon" remote="orient" />
+  <project path="packages/apps/Settings" name="packages_apps_Settings" remote="orient" />
+  <project path="packages/apps/SettingsIntelligence" name="packages_apps_SettingsIntelligence" remote="orient" />
+  <project path="packages/apps/SimpleDeviceConfig" name="packages_apps_SimpleDeviceConfig" remote="orient" />
+  <project path="packages/apps/ThemePicker" name="packages_apps_ThemePicker" remote="orient" />
+  <project path="packages/apps/WallpaperPicker2" name="packages_apps_WallpaperPicker2" remote="orient" />
+  <project path="packages/services/Telecomm" name="packages_services_Telecomm" remote="orient" />
+  <project path="packages/services/Telephony" name="packages_services_Telephony" remote="orient" />
+
+  <!-- Prebuilts -->
+  <project path="prebuilts/abi-dumps/vndk" name="prebuilts_abi-dumps_vndk" remote="orient" />
+  <project path="prebuilts/clang/host/linux-x86" name="prebuilts_clang_host_linux-x86" remote="orient" />
+  <project path="prebuilts/extract-tools" name="prebuilts_extract-tools" remote="orient" />
+
+  <!-- Recovery -->
+  <project path="bootable/recovery" name="bootable_recovery" remote="orient" />
+
+  <!-- System -->
+  <project path="system/bt" name="system_bt" remote="orient" />
+  <project path="system/core" name="system_core" remote="orient" />
+  <project path="system/linkerconfig" name="system_linkerconfig" remote="orient" />
+  <project path="system/qcom" name="system_qcom" remote="orient" />
+  <project path="system/security" name="system_security" remote="orient" />
+  <project path="system/sepolicy" name="system_sepolicy" remote="orient" />
+  <project path="system/tools/hidl" name="system_tools_hidl" remote="orient" />
+  <project path="system/update_engine" name="system_update_engine" remote="orient" />
+  <project path="system/vold" name="system_vold" remote="orient" />
+
+  <!-- Tools -->
+  <project path="tools/extract-utils" name="tools_extract-utils" remote="orient" />
+
+  <!-- Vendor -->
+  <project path="vendor/codeaurora/telephony" name="vendor_codeaurora_telephony" remote="orient" />
+  <project path="vendor/orient" name="vendor_orient" remote="orient" />
+  <project path="vendor/qcom/opensource/audio" name="platform/vendor/qcom-opensource/audio" remote="caf" />
+  <project path="vendor/qcom/opensource/data-ipa-cfg-mgr" name="vendor_qcom_opensource_data-ipa-cfg-mgr" remote="orient" />
+  <project path="vendor/qcom/opensource/dataservices" name="vendor_qcom_opensource_dataservices" remote="orient" />
+  <project path="vendor/qcom/opensource/interfaces" name="vendor_qcom_opensource_interfaces" remote="orient" />
+  <project path="vendor/qcom/opensource/power" name="vendor_qcom_opensource_power" remote="orient" />
+  <project path="device/qcom/common" name="device_qcom_common" remote="orient" />
+  <project path="device/qcom/sepolicy" name="device_qcom_sepolicy" remote="orient"  />
+  <project path="device/qcom/sepolicy_vndr" name="device_qcom_sepolicy" remote="orient" revision="12-vendor" />
+  <project path="device/qcom/sepolicy-legacy-um" name="device_qcom_sepolicy" remote="orient" revision="12-legacy-um" />  <project path="vendor/qcom/opensource/vibrator" name="vendor_qcom_opensource_vibrator" remote="orient" />
+  <project path="vendor/qcom/opensource/commonsys/bluetooth_ext" name="vendor_qcom_opensource_bluetooth_ext" remote="orient" />
+  <project path="vendor/qcom/opensource/commonsys/packages/apps/Bluetooth" name="vendor_qcom_opensource_packages_apps_Bluetooth" remote="orient" />
+  <project path="vendor/qcom/opensource/commonsys/system/bt" name="vendor_qcom_opensource_system_bt" remote="orient" />
+  <project path="vendor/qcom/opensource/commonsys-intf/bluetooth" name="vendor_qcom_opensource_bluetooth-commonsys-intf" remote="orient" />
+  <project path="vendor/qcom/opensource/commonsys-intf/display" name="vendor_qcom_opensource_display-commonsys-intf" remote="orient" />
+  <project path="vendor/qcom/opensource/commonsys-intf/wfd" name="vendor_qcom_opensource_wfd-commonsys" remote="orient" />
+
+</manifest>
